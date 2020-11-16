@@ -17,14 +17,12 @@ class SetUpAuditableKeyTables extends Migration
 
         Schema::create('auditable_values', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('auditable_key_id');
+            $table->foreignId('auditable_key_id')->constrained();
             $table->unsignedTinyInteger('type')->default(AuditableValue::TYPE_STRING);
             $table->text('value')->nullable();
             $table->timestamp('active_from');
             $table->timestamp('active_to')->nullable();
             $table->timestamps();
-
-            $table->foreign('auditable_key_id')->references('id')->on('auditable_keys');
         });
     }
 }

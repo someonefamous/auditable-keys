@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use SomeoneFamous\AuditableKeys\Models\AuditableValue;
+
+class SetUpAuditableKeyTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('auditable_keys', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('auditable_values', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('auditable_key_id');
+            $table->unsignedTinyInteger('type')->default(AuditableValue::TYPE_STRING);
+            $table->string('value')->nullable();
+            $table->timestamp('active_from');
+            $table->timestamp('active_to')->nullable();
+            $table->timestamps();
+
+            $table->foreign('auditable_key_id')->references('id')->on('auditable_keys');
+        });
+    }
+}

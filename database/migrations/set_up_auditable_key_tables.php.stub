@@ -19,7 +19,7 @@ class SetUpAuditableKeyTables extends Migration
             $table->id();
             $table->unsignedBigInteger('auditable_key_id');
             $table->unsignedTinyInteger('type')->default(AuditableValue::TYPE_STRING);
-            $table->string('value')->nullable();
+            $table->text('value')->nullable();
             $table->timestamp('active_from');
             $table->timestamp('active_to')->nullable();
             $table->timestamps();

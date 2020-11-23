@@ -3,9 +3,8 @@
 namespace SomeoneFamous\AuditableKeys\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use SomeoneFamous\FindBy\FindBy;
-
 use Illuminate\Database\Eloquent\Model;
+use SomeoneFamous\FindBy\FindBy;
 
 class AuditableValue extends Model
 {

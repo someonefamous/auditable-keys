@@ -32,7 +32,7 @@ class AuditableKey extends Model
             ->where('active_from', '<=', $timestamp)
             ->where(function($query) use ($timestamp)
             {
-                $query->where('active_to','>', $timestamp)
+                $query->where('active_to', '>', $timestamp)
                     ->orWhereNull('active_to');
             })
             ->first();

@@ -5,7 +5,7 @@ namespace SomeoneFamous\AuditableKeys\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use SomeoneFamous\FindBy\FindBy;
+use SomeoneFamous\FindBy\Traits\FindBy;
 
 class AuditableKey extends Model
 {

@@ -4,7 +4,7 @@ namespace SomeoneFamous\AuditableKeys\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use SomeoneFamous\FindBy\FindBy;
+use SomeoneFamous\FindBy\Traits\FindBy;
 
 class AuditableValue extends Model
 {

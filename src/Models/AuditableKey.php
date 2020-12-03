@@ -21,10 +21,10 @@ class AuditableKey extends Model
 
     public function getCurrentValueAttribute()
     {
-        return $this->getValueAt(Carbon::now()->timestamp);
+        return $this->getValueAt(Carbon::now());
     }
 
-    public function getValueAt(int $timestamp)
+    public function getValueAt(Carbon $timestamp)
     {
         $auditableValue =  $this->values()
             ->where('active_from', '<=', $timestamp)
@@ -40,19 +40,20 @@ class AuditableKey extends Model
 
     public function updateValue($value)
     {
-        $now = Carbon::now()->timestamp;
+        $now = Carbon::now();
 
         $this->deleteValue($now);
 
         AuditableValue::create([
             'auditable_key_id' => $this->id,
-            'active_from' => $now
+            'active_from' => $now,
+            'value' => $value
         ]);
     }
 
-    public function deleteValue($timestamp = null)
+    public function deleteValue(?Carbon $timestamp = null)
     {
-        $timestamp = $timestamp ?: Carbon::now()->timestamp;
+        $timestamp = $timestamp ?: Carbon::now();
 
         $this->values()
             ->where('active_to', '>=', $timestamp)

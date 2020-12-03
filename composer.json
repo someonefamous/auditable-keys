@@ -12,7 +12,8 @@
   ],
   "require": {
     "php": ">=7.4",
-    "someonefamous/laravel-findby": "^2.0"
+    "someonefamous/laravel-findby": "^2.0",
+    "nesbot/carbon": "^2.42"
   },
   "autoload": {
     "psr-4": {

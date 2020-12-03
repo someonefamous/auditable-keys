@@ -35,7 +35,7 @@ class AuditableKey extends Model
             })
             ->first();
 
-        return $auditableValue ? $auditableValue->value : null;
+        return $auditableValue ? $auditableValue->cast_value : null;
     }
 
     public function updateValue($value)

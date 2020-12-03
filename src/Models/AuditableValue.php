@@ -3,12 +3,9 @@
 namespace SomeoneFamous\AuditableKeys\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use SomeoneFamous\FindBy\Traits\FindBy;
 
 class AuditableValue extends Model
 {
-    use FindBy;
-
     const TYPE_STRING = 0;
     const TYPE_INT = 1;
     const TYPE_FLOAT = 2;

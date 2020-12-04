@@ -28,10 +28,8 @@ class AuditableKey extends Model
     {
         $auditableValue =  $this->values()
             ->where('active_from', '<=', $timestamp)
-            ->where(function($query) use ($timestamp)
-            {
-                $query->where('active_to', '>', $timestamp)
-                    ->orWhereNull('active_to');
+            ->where(function($query) use ($timestamp) {
+                $query->where('active_to', '>', $timestamp)->orWhereNull('active_to');
             })
             ->first();
 

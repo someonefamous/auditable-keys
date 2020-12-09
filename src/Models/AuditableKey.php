@@ -24,38 +24,37 @@ class AuditableKey extends Model
         return $this->getValueAt(Carbon::now());
     }
 
-    public function getValueAt(Carbon $timestamp)
+    public function getValueAt(Carbon $time)
     {
         $auditableValue =  $this->values()
-            ->where('active_from', '<=', $timestamp)
-            ->where(function($query) use ($timestamp) {
-                $query->where('active_to', '>', $timestamp)->orWhereNull('active_to');
+            ->where('active_from', '<=', $time)
+            ->where(function($query) use ($time) {
+                $query->where('active_to', '>', $time)->orWhereNull('active_to');
             })
             ->first();
 
         return $auditableValue ? $auditableValue->cast_value : null;
     }
 
-    public function updateValue($value)
+    public function updateValue($value = null)
     {
         $now = Carbon::now();
 
         $this->deleteValue($now);
 
-        AuditableValue::create([
-            'auditable_key_id' => $this->id,
+        $this->values()->create([
             'active_from' => $now,
             'value' => $value
         ]);
     }
 
-    public function deleteValue(?Carbon $timestamp = null)
+    public function deleteValue(?Carbon $time)
     {
-        $timestamp = $timestamp ?: Carbon::now();
+        $time = $time ?: Carbon::now();
 
         $this->values()
-            ->where('active_to', '>=', $timestamp)
+            ->where('active_to', '>=', $time)
             ->orWhereNull('active_to')
-            ->update(['active_to' => $timestamp]);
+            ->update(['active_to' => $time]);
     }
 }

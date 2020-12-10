@@ -10,15 +10,32 @@
       "email": "someonefamous@password99.com"
     }
   ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=7.4",
     "someonefamous/laravel-findby": "^2.0",
+    "someonefamous/auditable-values": "*",
     "nesbot/carbon": "^2.42"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.0",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
-      "SomeoneFamous\\AuditableKeys\\": "src"
+      "SomeoneFamous\\AuditableKeys\\": "src",
+      "SomeoneFamous\\AuditableKeys\\Database\\Factories\\": "database/factories"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SomeoneFamous\\AuditableKeys\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-f": "vendor/bin/phpunit --filter"
   },
   "extra": {
     "laravel": {
